@@ -31,6 +31,34 @@ var li1 = d3.select('ul').append('li')
 
 //You can chain any and all of the above together;
 
+////////////WORKING WITH DATA///////////////
+
+//D3 provides a fast method of selecting, updating, and removing data
+
+
+//The following will add the numbes 1, 2, 3, and 4 to different paragraphs within an existing html structure.
+//The html structure doesn't even need to have the paragraph elements yet.
+//The attached .text function will put the print statement, the data, and the indexes onto the page. 
+var randomArray = [1, 2, 3, 4]
+
+d3.select('body').selectAll('p')
+.data(randomArray)
+.enter().append('p')
+.text(function(d, i) {
+    return `Here's the new number: ${d} Here's its index: ${i}`
+})
+
+///////////////EXIT AND ENTER///////////////
+
+//.enter always belongs with .append; it's a metadata signal that we're going to be adding things
+d3.select('body').select('p')
+.enter().append('p')
+
+//.exit always belongs with .remove; it's a metadata signal that we're going to be removing things. 
+d3.select('body').select('p')
+.exit.remove()
+
+
 //////////////EVENT LISTENERS///////////////
 
 //1. Define the object
