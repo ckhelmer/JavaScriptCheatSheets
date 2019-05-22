@@ -31,10 +31,42 @@ var li1 = d3.select('ul').append('li')
 
 //You can chain any and all of the above together;
 
-////////////WORKING WITH DATA///////////////
+///////////////////.EACH//////////////////////
+d3.select('ul').selectAll('li')
+    .each(function(d, i) {
+        console.log('element', this);
+        console.log('data', d);
+        console.log('index', i);
+    })
+
+//functions within .each (or using .each as a basis) take only two arguments d (data) and i (index)
+
+///////////////ENTER, EXIT, AND MERGE///////////////
+
+//.enter always belongs with .append; it's a metadata signal that we're going to be adding things
+d3.select('body').select('p')
+.enter().append('p')
+
+//.exit always belongs with .remove; it's a metadata signal that we're going to be removing things. 
+d3.select('body').select('p')
+.exit.remove()
+
+//.merge adds elements that have been appended via .enter().append to a previous selection
+var selection = d3.selectAll('p')
+selection.enter().append('p')
+.merge(selection)
+.style('color', blue)
+
+////////////DATA BINDING///////////////
 
 //D3 provides a fast method of selecting, updating, and removing data
 
+//This selects the elements and will assign data from an array to the html 
+d3.select('ul').selectAll('li')
+    .data(randomArray)
+    .text(function(d) {
+        return d;
+    })
 
 //The following will add the numbes 1, 2, 3, and 4 to different paragraphs within an existing html structure.
 //The html structure doesn't even need to have the paragraph elements yet.
@@ -48,15 +80,15 @@ d3.select('body').selectAll('p')
     return `Here's the new number: ${d} Here's its index: ${i}`
 })
 
-///////////////EXIT AND ENTER///////////////
+//You can also change the classes of appended elements and add html directly into the JS
+d3.select('body').selectAll('div')
+.data(randomArray)
+.enter().append('div')
+.classed('col-md-2', true)
+.html(function(d){
+    return `<img src= '${d.URL}>`;
+})
 
-//.enter always belongs with .append; it's a metadata signal that we're going to be adding things
-d3.select('body').select('p')
-.enter().append('p')
-
-//.exit always belongs with .remove; it's a metadata signal that we're going to be removing things. 
-d3.select('body').select('p')
-.exit.remove()
 
 
 //////////////EVENT LISTENERS///////////////
