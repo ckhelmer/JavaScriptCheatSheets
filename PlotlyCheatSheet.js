@@ -98,6 +98,19 @@ var trace1 = {
     type: 'box'
 };
 
+//////////////CANDLESTICK////////////////
+var trace1 = {
+    'type': 'candlestick',
+    x: dates,
+    high: highPrices,
+    low: lowPrices,
+    open: openingPrices,
+    close: closingPrices
+};
+
+Plotly.newPlot('plot', [trace1])
+
+
 /////////////INTERACTIVITY///////////////
 
 //To make a plotly graph interactive, make an 'update' function

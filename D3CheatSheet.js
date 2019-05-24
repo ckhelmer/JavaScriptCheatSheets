@@ -121,6 +121,9 @@ d3.event.preventDefault();
  // Select the input element and get the raw HTML node
  var inputElement = d3.select("#example-form-input");
 
+ //You can also use nodes to do the same thing
+ var variable = d3.select('#variable').node().value
+
  // Get the value property of the input element
  var inputValue = inputElement.property("value")
 
