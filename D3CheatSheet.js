@@ -1,3 +1,9 @@
+///////////////Built in functions with d3/////////////////
+minimum = d3.min(randomArray)
+maximum = d3.max(randomArray)
+distanceBetweenMinMax = d3.extent(randomArray)
+
+
 //////////////selecting html elements with d3////////////
 
 // To select an html element
@@ -28,6 +34,9 @@ d3.selectAll('li').style('color', 'blue');
 
 //Create a new element
 var li1 = d3.select('ul').append('li')
+
+//To change a class
+d3.select('ul').classed('whatever', true)
 
 //You can chain any and all of the above together;
 
