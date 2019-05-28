@@ -98,8 +98,6 @@ d3.select('body').selectAll('div')
     return `<img src= '${d.URL}>`;
 })
 
-
-
 //////////////EVENT LISTENERS///////////////
 
 //1. Define the object
