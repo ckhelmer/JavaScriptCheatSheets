@@ -1,7 +1,10 @@
-///////////////Built in functions with d3/////////////////
+///////////////Built in math functions with d3/////////////////
 minimum = d3.min(randomArray)
 maximum = d3.max(randomArray)
 distanceBetweenMinMax = d3.extent(randomArray)
+
+//To sort a numerical string (can pass descending or ascending)
+randomArray.sort(d3.descending)
 
 
 //////////////selecting html elements with d3////////////
@@ -52,15 +55,18 @@ d3.select('ul').selectAll('li')
 
 ///////////////ENTER, EXIT, AND MERGE///////////////
 
-//.enter always belongs with .append; it's a metadata signal that we're going to be adding things
+//.enter always belongs with .append when we're dealing with data; it's a metadata signal that we're going to be adding things
 d3.select('body').select('p')
+.data(randomArray)
 .enter().append('p')
 
-//.exit always belongs with .remove; it's a metadata signal that we're going to be removing things. 
+//.exit always belongs with .remove when we're dealing with data ; it's a metadata signal that we're going to be removing things. 
 d3.select('body').select('p')
+.data(randomArray)
 .exit.remove()
 
 //.merge adds elements that have been appended via .enter().append to a previous selection
+//Essentially it adds new data to existing data
 var selection = d3.selectAll('p')
 selection.enter().append('p')
 .merge(selection)
@@ -138,4 +144,32 @@ d3.event.preventDefault();
      return rows.map(function(row) {
          return row[index];
      });
+     
  }
+
+ ////////////////WORKING WITH SVGS//////////////////
+
+ //svgs are html tags (<svg>) SVG stands for scalable vector graphic
+ //You append them and work with them via standard d3 notation
+ var svg = d3.select('body').append('svg');
+ //You have to assign them widths and heights or they don't have any 
+ svg.attr('width', '100px').attr('height', '100px');
+
+ //Circles have x, y, and radius attributes
+ svg.append('circle')
+    .attr('cx', 50)
+    .attr('cy', 25)
+    .attr('r', 25)
+
+ //Squares and rectangles hae heights and widths;
+ //You 'scale' the graphic by putting functions in as arguments for the attributes
+ svg.append('rect')
+    .attr('width', 100)
+    .attr('height', function(d) {
+        return d*10
+    }) 
+    
+ //You can append a group within an SVG to add an internal area of the box which can be resized
+ //Their default alignment is to the top left; 'transform and translate moves them down and over'
+ var svgGroup = svg.append('g')
+    .attr('transform', 'translate(50,100)')   
