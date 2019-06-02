@@ -147,7 +147,31 @@ d3.event.preventDefault();
      
  }
 
+ //d3 also lets you grab stuff from CSVs, but CORS on Chrome hates it
+ //(To start a browser without security, pass this to the command line in windows 10):
+ //"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp)
+d3.csv('file'), function(error, data) {
+    if (error) return console.warn(error);
+    console.log(data);
+}
+
+//D3.csv is pretty much beyond screwy on some systems (mine, for example). A workaround is to hardcode the CSV as a Blob.
+var csv = URL.createObjectURL(new Blob([`CSV GOES HERE`]);
+//then you read it in like normal
+d3.csv(csv).then(function(data) {
+    console.log(data);
+})
+
+//To cast values as numbers:
+randomArray.forEach(function(data) {
+    data.year = +data.year;
+})
+
+//To parse time
+var parseTime = d3.timeParse('%Y')
+
  ////////////////WORKING WITH SVGS//////////////////
+ /////////////////(aka GRAPHING)////////////////////
 
  //svgs are html tags (<svg>) SVG stands for scalable vector graphic
  //You append them and work with them via standard d3 notation
@@ -161,7 +185,7 @@ d3.event.preventDefault();
     .attr('cy', 25)
     .attr('r', 25)
 
- //Squares and rectangles hae heights and widths;
+ //Squares and rectangles have heights and widths;
  //You 'scale' the graphic by putting functions in as arguments for the attributes
  svg.append('rect')
     .attr('width', 100)
@@ -169,7 +193,58 @@ d3.event.preventDefault();
         return d*10
     }) 
     
+ //You can set a chart inside an SVG (ie, with margins) by declaring them
+ var chartMargin = {
+     top: 30,
+     right: 30,
+     bottom: 30,
+     left: 30
+ };
+
+ var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
+ var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
+  
  //You can append a group within an SVG to add an internal area of the box which can be resized
  //Their default alignment is to the top left; 'transform and translate moves them down and over'
  var svgGroup = svg.append('g')
-    .attr('transform', 'translate(50,100)')   
+    .attr('transform', 'translate(50,100)')
+    
+//We can scale SVGs by using a domain and a range function
+//This makes a value with a length of 100 pixels take up 1000 pixels in the final output
+var yScale = d3.scaleLinear()
+    .domain([0,100])
+    .range([0,1000]);
+//You can also pass in variables
+var yScale = d3.scaleLinear()
+    .domain(d3.extent(randomArray))
+    .range(0, svgHeight);
+//You can do the same thing with discrete data; this essentially 'intuits' a .length
+var xScale = d3.scaleBand()
+    .domain(randomArray)
+    .range([0, svgWidth]);
+
+//Axes
+//First create the chart scale (as above), then declare axes in appropriate locations
+var yAxis = d3.axisLeft(yScale)
+var xAxis = d3.axisBottom(xScale)
+//To append to chart group (x axis must be transposed)
+chartGroup.append('g')
+attr('transform', `translate(0, ${chartHeight})`)
+.call(xAxis)
+
+chartGroup.append('g')
+.call(yAxis)
+
+//Lines
+//To create a line you pass the coordinates of its verices followed by the d3.line function
+var coordinates = [
+    [100, 100],
+    [200, 200]
+];
+
+var lineGenerator = d3.line();
+
+//The 'd' attribute stands for 'draw'
+svg.append('path')
+    .attr('fill', 'none')
+    .attr('d', lineGenerator(coordinates))
