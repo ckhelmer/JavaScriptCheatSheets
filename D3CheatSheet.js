@@ -156,7 +156,7 @@ d3.csv('file'), function(error, data) {
 }
 
 //D3.csv is pretty much beyond screwy on some systems (mine, for example). A workaround is to hardcode the CSV as a Blob.
-var csv = URL.createObjectURL(new Blob([`CSV GOES HERE`]);
+var csv = URL.createObjectURL(new Blob([`CSV GOES HERE`]));
 //then you read it in like normal
 d3.csv(csv).then(function(data) {
     console.log(data);
