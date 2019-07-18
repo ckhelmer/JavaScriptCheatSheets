@@ -1,0 +1,36 @@
+<!--Javascript examples here are written within HTML-->
+
+<!--On click events-->
+
+<p id = 'demo'>JavaScript can change HTML Content.</p>
+
+<!--TEXT-->
+<button type = 'button' onclick = 'document.getElementByID('demo').innerHTML = 'Hello JavaScript!'></button>//
+    <!--<tag class = '__________' '___________' = document.getElementByID('_________').innerHTML = '____________></>-->
+    <!--                (class)   (JS function)                           (element id)              (what you're changing the HTML to)-->
+
+<!--SRC-->
+    <button onclick="document.getElementById('myImage').src='pic_bulbon.gif'">Turn on the light</button>
+    <!--<tag ____________ = 'document.getElementByID('________').src = '_____________'> Tag Text </tag>--> 
+    <!--    (JS function)                           (element id)        (url or path)-->
+
+<!--CSS STYLE-->
+<button type="button" onclick="document.getElementById('demo').style.fontSize='35px'">Click Me!</button>    
+    <!-- <tag ____________ = document.getElementByID('__________').style._____________ = '_________'> Tag Text </tag>--> 
+    <!--      (JS function)                          (element id)       (css attribute)    (value)-->
+
+<!--HIDE ELEMENTS-->
+<button type="button" onclick="document.getElementById('demo').style.display='none'">Click Me!</button>
+    <!-- <tag ____________ = document.getElementByID('__________').style.display = 'none'> Tag Text </tag>--> 
+    <!--      (JS function)                          (element id)       -->
+    
+<!--DISPLAY HIDDEN ELEMENTS-->
+<button type="button" onclick="document.getElementById('demo').style.display='block'">Click Me!</button>
+    <!-- <tag ____________ = document.getElementByID('__________').style.display = 'block'> Tag Text </tag>--> 
+    <!--      (JS function)                          (element id)       -->
+    
+<!--ALERT BOX-->
+<script>window.alert("I'm an alert!")</script>
+
+<!--LOGGING TO THE CONSOLE-->
+<script>console.log("I'm a log")</script>

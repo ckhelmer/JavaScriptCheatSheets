@@ -1,3 +1,37 @@
+/*
+Multi-line commenting
+*/
+
+/////////////Math///////////////////
+var x, y;
+
+x += y // x = x + y
+x -= y // x = x - y
+x *= y // x = x * y
+x /= y // x = x / y
+x %= y // x = x % y
+x **= y // x = x ** y
+
+/////////////Comparisons/////////////
+==  // equal value
+=== // equal value and type
+!=  // not equal to
+!== // not equal value OR type
+>   // greater than
+<   // less than
+>=  // greater than or equal to
+<=  // less than or equal to
+?   // ternary operator
+
+/////////////Logical Operators//////////
+&& // and
+|| // or
+!  // not
+
+///////////Type Operators///////////////
+typeof // returns the type of a variable
+instanceof // returns "True" if an object is an instance of an object type
+
 /////////////Variables//////////////
 //Variables in JavaScript must be declared:
 var a = 12;
@@ -13,6 +47,9 @@ let a = 12;
 const a = 12;
     //const ___________ = ___________;
     //    (variable name)  (value)
+
+//You can also instantiate several variables at once
+var x, y;
 
 ////////////Arrays///////////////
 
@@ -47,7 +84,10 @@ var movie = {
 };
 //You can call a value with dot notation
 movie.name;
-movie.sequels[3]; 
+movie.sequels[3];
+
+//You can also call with column notation
+movie['year'];
 
 //To add a key-value pair
 movie.rating = 10;
@@ -63,6 +103,18 @@ Object.values(movie);
 
 //To access both
 Object.entries(movies);
+
+//Methods are functions within objects
+var person = {
+    firstName = "Sarah Jane",
+    lastName = "Smith",
+    fullName = function() {
+        return this.firstName + this.lastName
+    }
+};
+
+//To access the above:
+person.fullName();
 
 ////////////String concatenation//////////////
 console.log("Hello world!")
@@ -145,4 +197,63 @@ var mapRandomArray = randomArray.map(function(a, b) {
 var filteredArray = randomArray.filter(function(whatever) {
     //Whatever operation here
 })
+
+///////////////Events////////////////
+//A complete list of DOM events can be found here: https://www.w3schools.com/jsref/dom_obj_event.asp
+
+/////////////String Operations (Methods)//////////////
+
+//To find the length
+var txt = "Blah";
+var lng = txt.length;
+
+//To find a string within a string
+var str = "I am a string";
+var location = str.indexOf("string"); //1st character - searches forward
+var location = str.indexOf("string", 4); //Starts at the 5th (index 4) character
+
+var location2 = str.lastIndexOf("string")//Last Character- searches backwards
+
+var searched = str.search("string")//Finds the character
+
+//To extract a part of a string
+var str = "I am a string."
+var result = str.slice(7, 13) // result = "string"
+
+var result = str.slice(7) // result = "string"
+
+var result = str.slice(-7) // result = "I am a "
+
+//You can also use substring to extract. No negative indexes.
+var result = str.substring(7,13) // result = "string"
+
+//Substr takes the length of the string as the 2nd parameter
+var result str.substr(7, 6) // result = "string"
+
+//To replace one value with another
+str = "Replace I!"
+var result = str.replace("I", "me")
+
+//To make case insensitive
+var result = str.replace(/i/i, "me")
+
+//To replace all instances on the page
+var n = str.replace(/i/g, "me")
+
+//To upper and lowercase
+str.toUpperCase();
+str.toLowerCase();
+
+//To concatenate
+text = "Hello".concat(" ", "World")
+text = "Hello" + " " + "World"
+
+//To trim
+str.trim()
+
+//Special Characters
+//To include a quote within a string, use the backlash
+\' = '
+\" = "
+\\ = \
 
