@@ -41,24 +41,7 @@ var li1 = d3.select('ul').append('li')
 //To change a class
 d3.select('ul').classed('whatever', true)
 
-//You can chain any and all of the above together, like so:
-d3.selectAll('h1').text("I get or set text of an element")
-    .append('I add an element inside the selected element, but before the end')
-    .insert('I insert a new element inside the selected element')
-    .remove("I remove an element")
-    .html('I get or set the HTML of an element')
-    .attr("I get or set attributes of a selected element")
-    .property("I get or set a property of a selected element")
-    .style("I get or set the style of an element")
-    .classed("I get, add, or remove a css class from an element")
-
-//Function parameters within d3 classes
-.text(function(d,i) {
-    console.log(d); //the data
-    console.log(i); //the index of the data
-    console.log(this); //the current DOM object 
-}) 
-
+//You can chain any and all of the above together;
 
 ///////////////////.EACH//////////////////////
 d3.select('ul').selectAll('li')
@@ -133,16 +116,6 @@ function handleClick() {
 
 //3.Trigger the function
 button.on('click', handleClick);
-
-//More methods of 'listening' to events:
-selection.on('click', handleClick)
-selection.dispatch()
-//Accesses standard events(like prevent refresh)
-d3.event('') 
-//Gets the x and y coordinates of the current mouse position
-d3.mouse('container')
-//Gets the touch coordinates to a container
-d3.touch()
 
 ////////////To prevent refresh/////////////
 d3.event.preventDefault();
@@ -275,15 +248,3 @@ var lineGenerator = d3.line();
 svg.append('path')
     .attr('fill', 'none')
     .attr('d', lineGenerator(coordinates))
-
-
-///////////////////ANIMATION (TRANSITIONS)////////////////////////
-
-//To schedule a transition
-d3.selection.transition()
-//To specifie the duration in milliseconds
-d3.selection.transition.duration()
-//To specify the 'easing' function (linear, elastic, bounce)
-d3.selection.transition.ease()
-//To delay a transition
-d3.selection.transition.delay()
